@@ -52,7 +52,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             //       type: "boolean",
             //       description: "Run with substat optimization"
             //     }
-            //     // 他のオプションも必要に応じて追加
+            //     // Add other options as needed
             //   },
             //   description: "Simulation options"
             // }
@@ -75,7 +75,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const configContent = String(request.params.arguments?.config);
   // const options = request.params.arguments?.options || {};
 
-  // configファイルの一時保存と実行
+  // Temporary save and execute config file
   return await executeGcsimCommand(configContent);
 });
 
@@ -102,7 +102,7 @@ server.setRequestHandler(ListPromptsRequestSchema, async () => {
  * This allows the server to communicate via standard input/output streams.
  */
 async function main() {
-  // MCPホストから渡されたコマンドライン引数を取得
+  // Get command line arguments passed from the MCP host
   initConfig(process.argv);
 
   const transport = new StdioServerTransport();
