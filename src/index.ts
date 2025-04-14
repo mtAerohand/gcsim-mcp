@@ -4,6 +4,8 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   CallToolRequestSchema,
+  ListPromptsRequestSchema,
+  ListResourcesRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import { initConfig } from "./config.js";
@@ -75,6 +77,24 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
   // configファイルの一時保存と実行
   return await executeGcsimCommand(configContent);
+});
+
+/**
+ * Handler for listing available resources.
+ */
+server.setRequestHandler(ListResourcesRequestSchema, async () => {
+  return {
+    resources: []
+  };
+});
+
+/**
+ * Handler that lists available prompts.
+ */
+server.setRequestHandler(ListPromptsRequestSchema, async () => {
+  return {
+    prompts: []
+  };
 });
 
 /**
